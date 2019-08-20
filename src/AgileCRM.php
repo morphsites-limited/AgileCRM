@@ -2,7 +2,6 @@
 
 namespace Dewbud\AgileCRM;
 
-use Dewbud\AgileCRM\Response;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 
@@ -41,7 +40,7 @@ class AgileCRM
      * @param string $user    User email
      * @param string $key     REST API key
      */
-    public function __construct(string $domain, string $user, string $key)
+    public function __construct($domain, $user, $key)
     {
         $this->domain     = $domain;
         $this->user_email = $user;
@@ -92,7 +91,7 @@ class AgileCRM
      * @param array $deal
      * @return \Dewbud\AgileCRM\Response
      */
-    public function editDeal(string $id, array $deal)
+    public function editDeal($id, array $deal)
     {
         $data = array_merge($deal, ['id' => $id]);
         return new Response($this->send('PUT', 'opportunity/partial-update', $data));
@@ -103,7 +102,7 @@ class AgileCRM
      * @param string $email
      * @return \Dewbud\AgileCRM\Response|null
      */
-    public function searchContact(string $email)
+    public function searchContact($email)
     {
         $res = $this->send('GET', "contacts/search/email/{$email}");
 
@@ -138,7 +137,7 @@ class AgileCRM
      * @param array $properties
      * @return \Dewbud\AgileCRM\Response
      */
-    public function editContact(string $id, array $properties)
+    public function editContact($id, array $properties)
     {
 
         $data = [
@@ -155,7 +154,7 @@ class AgileCRM
      * @param array $task
      * @return \Dewbud\AgileCRM\Response
      */
-    public function newTaskForContact(string $contact_email, array $task)
+    public function newTaskForContact($contact_email, array $task)
     {
         return new Response($this->send('POST', "tasks/email/{$contact_email}", $task));
     }
@@ -180,7 +179,7 @@ class AgileCRM
      *
      * @return \GuzzleHttp\Psr7\Response
      */
-    protected function send(string $verb, string $resource, array $request = [], array $options = [])
+    protected function send($verb, $resource, array $request = [], array $options = [])
     {
         $default_options = [
             'allow_redirects' => true,
