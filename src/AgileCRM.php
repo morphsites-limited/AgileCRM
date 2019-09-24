@@ -137,7 +137,7 @@ class AgileCRM
      * @param array $properties
      * @return \Dewbud\AgileCRM\Response
      */
-    public function editContact($id, array $properties)
+    public function editContact($id, array $properties, array $tags = [])
     {
 
         $data = [
@@ -146,6 +146,24 @@ class AgileCRM
         ];
 
         return new Response($this->send('PUT', 'contacts/edit-properties', $data));
+    }
+
+    /**
+     * Add tags to an existing contact/company
+     *
+     * @param string $id
+     * @param array $tags
+     * @return \Dewbud\AgileCRM\Response
+     */
+    public function addTagsToContact($id, array $tags = [])
+    {
+
+        $data = [
+            'id'         => $id,
+            'tags'       => $tags,
+        ];
+
+        return new Response($this->send('PUT', 'contacts/edit/tags', $data));
     }
 
     /**
