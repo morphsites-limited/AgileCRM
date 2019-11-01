@@ -10,6 +10,7 @@ const SYSTEM_TYPES = [
     'website',
     'title',
     'owner_id',
+    'address',
 ];
 
 const HAS_SUBTYPE = [
