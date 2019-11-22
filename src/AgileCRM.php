@@ -188,6 +188,16 @@ class AgileCRM
     }
 
     /**
+     * Create a new note
+     * @param array $note
+     * @return \Dewbud\AgileCRM\Response
+     */
+    public function newNote(array $note)
+    {
+        return new Response($this->send('POST', "notes", $note));
+    }
+
+    /**
      * Send request via Guzzle
      *
      * @param string $verb      HTTP verb
